@@ -1,0 +1,38 @@
+export function Footer() {
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <footer className="relative z-10 border-t border-border py-10">
+      <div className="mx-auto flex max-w-[1100px] flex-col items-center gap-5 px-6 sm:flex-row sm:justify-between">
+        <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-7">
+          <a
+            href="#"
+            className="flex items-center gap-1.5 text-[0.88rem] font-medium text-text no-underline"
+          >
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-green" />
+            nodo
+          </a>
+          <span className="text-[0.7rem] text-text-tertiary">
+            © 2026 nodo. ciudad de méxico & buenos aires.
+          </span>
+        </div>
+
+        <ul className="flex gap-6" style={{ listStyle: "none" }}>
+          {["servicios", "proceso", "equipo"].map((item) => (
+            <li key={item}>
+              <button
+                onClick={() => scrollTo(item)}
+                className="cursor-pointer border-none bg-transparent text-[0.72rem] text-text-secondary transition-colors hover:text-text font-mono"
+              >
+                {item}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </footer>
+  );
+}
