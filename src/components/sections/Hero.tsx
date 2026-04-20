@@ -9,10 +9,10 @@ export function Hero() {
   const scrollTo = useScrollTo();
 
   return (
-    <section className="relative z-10 flex min-h-screen flex-col justify-center px-6 pt-32 pb-16">
+    <section className="relative z-10 flex min-h-[85vh] sm:min-h-screen flex-col justify-center px-4 sm:px-6 pt-24 sm:pt-32 pb-10 sm:pb-16">
       <div className="mx-auto w-full max-w-[1100px]">
         <motion.div
-          className="mb-8 inline-flex items-center gap-2 text-[0.72rem] uppercase tracking-widest text-text-secondary"
+          className="mb-6 sm:mb-8 inline-flex items-center gap-2 text-[0.6rem] sm:text-[0.68rem] md:text-[0.72rem] uppercase tracking-widest text-text-secondary"
           variants={fadeUpWithDelay(0)}
           initial="hidden"
           animate="visible"
@@ -29,7 +29,7 @@ export function Hero() {
         </motion.div>
 
         <motion.h1
-          className="mb-7 max-w-[820px] text-[clamp(2.4rem,5.5vw,4.2rem)] font-normal leading-[1.1] tracking-tighter"
+          className="mb-6 sm:mb-7 max-w-[820px] text-[clamp(2rem,7vw,4.2rem)] font-normal leading-[1.08] tracking-tighter"
           variants={fadeUpWithDelay(0.1)}
           initial="hidden"
           animate="visible"
@@ -40,7 +40,7 @@ export function Hero() {
         </motion.h1>
 
         <motion.p
-          className="mb-10 max-w-[560px] text-[0.92rem] leading-relaxed text-text-secondary"
+          className="mb-8 sm:mb-10 max-w-[560px] text-[0.88rem] sm:text-[0.92rem] leading-relaxed text-text-secondary"
           variants={fadeUpWithDelay(0.2)}
           initial="hidden"
           animate="visible"
@@ -51,7 +51,7 @@ export function Hero() {
         </motion.p>
 
         <motion.div
-          className="flex flex-col items-start gap-3 sm:flex-row sm:items-center"
+          className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center"
           variants={fadeUpWithDelay(0.3)}
           initial="hidden"
           animate="visible"

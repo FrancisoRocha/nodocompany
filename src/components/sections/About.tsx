@@ -4,9 +4,9 @@ import { EASE_OUT_EXPO } from "../../config/animations";
 
 export function About() {
   return (
-    <section id="nosotros" className="relative z-10 py-24">
-      <div className="mx-auto max-w-[1100px] px-6">
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
+    <section id="nosotros" className="relative z-10 py-16 sm:py-20 md:py-24">
+      <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
+        <div className="grid grid-cols-1 items-start gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -32,7 +32,7 @@ export function About() {
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-2 gap-4"
+            className="grid grid-cols-2 gap-3 sm:gap-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.12 }}
@@ -45,12 +45,12 @@ export function About() {
             {STATS.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-[10px] border border-border bg-bg-card p-7 text-center transition-all duration-300 hover:-translate-y-0.5 hover:border-border-hover"
+                className="rounded-[10px] border border-border bg-bg-card p-5 sm:p-6 md:p-7 text-center transition-all duration-300 hover:-translate-y-0.5 hover:border-border-hover"
               >
-                <div className="mb-1.5 text-[2rem] font-normal leading-none tracking-tighter">
+                <div className="mb-1.5 text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] font-normal leading-none tracking-tighter">
                   {stat.num}
                 </div>
-                <div className="text-[0.72rem] tracking-wide text-text-tertiary">
+                <div className="text-[0.65rem] sm:text-[0.7rem] md:text-[0.72rem] tracking-wide text-text-tertiary">
                   {stat.label}
                 </div>
               </div>

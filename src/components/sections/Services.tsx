@@ -6,14 +6,14 @@ import { SectionHeader } from "../ui/SectionHeader";
 
 function ServiceCard({ service }: { service: Service }) {
   return (
-    <div className="bg-bg p-8 transition-colors duration-300 hover:bg-bg-card">
-      <span className="mb-6 block text-[0.65rem] tracking-widest text-text-tertiary">
+    <div className="bg-bg p-6 sm:p-7 md:p-8 transition-colors duration-300 hover:bg-bg-card">
+      <span className="mb-5 sm:mb-6 block text-[0.62rem] sm:text-[0.65rem] tracking-widest text-text-tertiary">
         {service.num}
       </span>
-      <h3 className="mb-4 text-[1.05rem] font-medium tracking-tight">
+      <h3 className="mb-3 sm:mb-4 text-[1rem] sm:text-[1.05rem] font-medium tracking-tight">
         {service.title}
       </h3>
-      <p className="mb-5 text-[0.82rem] leading-relaxed text-text-secondary">
+      <p className="mb-4 sm:mb-5 text-[0.8rem] sm:text-[0.82rem] leading-relaxed text-text-secondary">
         {service.description}
       </p>
       <ul className="flex flex-col gap-2" style={{ listStyle: "none" }}>
@@ -33,10 +33,10 @@ function ServiceCard({ service }: { service: Service }) {
 
 export function Services() {
   return (
-    <section id="servicios" className="relative z-10 py-24">
-      <div className="mx-auto max-w-[1100px] px-6">
+    <section id="servicios" className="relative z-10 py-16 sm:py-20 md:py-24">
+      <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
         <SectionHeader
-          className="mb-14"
+          className="mb-10 sm:mb-12 md:mb-14"
           eyebrow="servicios"
           title={
             <>

@@ -14,15 +14,21 @@ interface FloatingCardProps {
 }
 
 const SIZES: Record<NonNullable<FloatingCardProps["size"]>, string> = {
-  sm: "h-[64px] w-[64px]",
-  md: "h-[86px] w-[86px]",
-  lg: "h-[140px] w-[140px]",
+  sm: "h-[44px] w-[44px] sm:h-[54px] sm:w-[54px] md:h-[64px] md:w-[64px]",
+  md: "h-[58px] w-[58px] sm:h-[72px] sm:w-[72px] md:h-[86px] md:w-[86px]",
+  lg: "h-[92px] w-[92px] sm:h-[114px] sm:w-[114px] md:h-[140px] md:w-[140px]",
 };
 
 const LABEL_SIZES: Record<NonNullable<FloatingCardProps["size"]>, string> = {
-  sm: "text-[0.52rem]",
-  md: "text-[0.58rem]",
-  lg: "text-[0.75rem]",
+  sm: "text-[0.42rem] sm:text-[0.48rem] md:text-[0.52rem]",
+  md: "text-[0.46rem] sm:text-[0.52rem] md:text-[0.58rem]",
+  lg: "text-[0.58rem] sm:text-[0.66rem] md:text-[0.75rem]",
+};
+
+const ICON_SCALES: Record<NonNullable<FloatingCardProps["size"]>, string> = {
+  sm: "scale-[0.7] sm:scale-[0.85] md:scale-100",
+  md: "scale-[0.7] sm:scale-[0.85] md:scale-100",
+  lg: "scale-[0.65] sm:scale-[0.82] md:scale-100",
 };
 
 /**
@@ -41,6 +47,7 @@ export function FloatingCard({
 }: FloatingCardProps) {
   const sizeClass = SIZES[size];
   const labelSize = LABEL_SIZES[size];
+  const iconScale = ICON_SCALES[size];
 
   const isCore = variant === "core";
   const isAccent = variant === "accent";
@@ -96,27 +103,31 @@ export function FloatingCard({
                   }
           }
         >
-          {icon}
-          <span
-            className={`${labelSize} font-mono tracking-wider ${
-              isCore
-                ? "text-white font-medium"
-                : isAccent
-                  ? "text-blue-700"
-                  : "text-slate-600"
-            }`}
+          <div
+            className={`flex flex-col items-center justify-center gap-1.5 ${iconScale}`}
           >
-            {label}
-          </span>
-          {sublabel && (
+            {icon}
             <span
-              className={`text-[0.48rem] font-mono tracking-wider ${
-                isCore ? "text-white/70" : "text-slate-400"
+              className={`${labelSize} font-mono tracking-wider ${
+                isCore
+                  ? "text-white font-medium"
+                  : isAccent
+                    ? "text-blue-700"
+                    : "text-slate-600"
               }`}
             >
-              {sublabel}
+              {label}
             </span>
-          )}
+            {sublabel && (
+              <span
+                className={`text-[0.38rem] sm:text-[0.42rem] md:text-[0.48rem] font-mono tracking-wider ${
+                  isCore ? "text-white/70" : "text-slate-400"
+                }`}
+              >
+                {sublabel}
+              </span>
+            )}
+          </div>
 
           {/* Pulse halo solo en el core */}
           {isCore && (

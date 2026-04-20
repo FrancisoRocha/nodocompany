@@ -25,7 +25,7 @@ interface AsAnchorProps
 type ButtonProps = AsButtonProps | AsAnchorProps;
 
 const BASE =
-  "inline-flex cursor-pointer items-center gap-2 rounded-md px-6 py-2.5 text-[0.82rem] transition-all hover:-translate-y-0.5 font-mono no-underline";
+  "inline-flex cursor-pointer items-center justify-center gap-2 rounded-md px-5 sm:px-6 py-2.5 text-[0.78rem] sm:text-[0.82rem] transition-all hover:-translate-y-0.5 font-mono no-underline";
 
 const VARIANTS: Record<ButtonVariant, string> = {
   primary: "bg-text text-bg border-none hover:opacity-80",

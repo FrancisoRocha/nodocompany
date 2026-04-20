@@ -8,9 +8,9 @@ export function CTA() {
   return (
     <section
       id="contacto"
-      className="relative z-10 border-t border-border py-24 text-center"
+      className="relative z-10 border-t border-border py-16 sm:py-20 md:py-24 text-center"
     >
-      <div className="mx-auto max-w-[1100px] px-6">
+      <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -25,12 +25,12 @@ export function CTA() {
             <br />
             tu negocio con ia?
           </h2>
-          <p className="mx-auto mb-9 max-w-[480px] text-[0.88rem] leading-relaxed text-text-secondary">
+          <p className="mx-auto mb-8 sm:mb-9 max-w-[480px] text-[0.85rem] sm:text-[0.88rem] leading-relaxed text-text-secondary">
             agenda una llamada de 20 minutos. sin compromiso, sin letra chica.
             te mostramos qué podemos automatizar y cuánto te ahorrarías.
           </p>
 
-          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="flex flex-col items-stretch sm:items-center justify-center gap-3 sm:flex-row">
             <Button
               as="a"
               href={CONTACT.calendly}

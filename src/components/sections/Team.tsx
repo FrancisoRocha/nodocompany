@@ -7,7 +7,7 @@ import { AnimatedAvatar } from "../ui/AnimatedAvatar";
 
 function MemberCard({ member }: { member: Member }) {
   return (
-    <div className="rounded-[10px] border border-border bg-bg p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-border-hover hover:shadow-[0_8px_24px_rgba(37,37,36,0.06)]">
+    <div className="rounded-[10px] border border-border bg-bg p-6 sm:p-7 md:p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-border-hover hover:shadow-[0_8px_24px_rgba(37,37,36,0.06)]">
       <AnimatedAvatar
         initials={member.initials}
         gradient={member.gradient}

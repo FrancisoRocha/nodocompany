@@ -5,9 +5,9 @@ export function Footer() {
   const scrollTo = useScrollTo();
 
   return (
-    <footer className="relative z-10 border-t border-border py-10">
-      <div className="mx-auto flex max-w-[1100px] flex-col items-center gap-5 px-6 sm:flex-row sm:justify-between">
-        <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-7">
+    <footer className="relative z-10 border-t border-border py-8 sm:py-10">
+      <div className="mx-auto flex max-w-[1100px] flex-col items-center gap-5 px-4 sm:px-6 sm:flex-row sm:justify-between">
+        <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-7 text-center">
           <a
             href="#"
             className="flex items-center gap-1.5 text-[0.88rem] font-medium text-text no-underline"
@@ -26,7 +26,7 @@ export function Footer() {
           </span>
         </div>
 
-        <ul className="flex gap-6" style={{ listStyle: "none" }}>
+        <ul className="flex flex-wrap justify-center gap-4 sm:gap-6" style={{ listStyle: "none" }}>
           {FOOTER_LINKS.map((link) => (
             <li key={link.id}>
               <button

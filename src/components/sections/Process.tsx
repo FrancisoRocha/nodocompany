@@ -7,11 +7,11 @@ export function Process() {
   return (
     <section
       id="proceso"
-      className="relative z-10 border-y border-border py-24"
+      className="relative z-10 border-y border-border py-16 sm:py-20 md:py-24"
     >
-      <div className="mx-auto max-w-[1100px] px-6">
+      <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
         <SectionHeader
-          className="mb-16"
+          className="mb-12 sm:mb-14 md:mb-16"
           align="center"
           eyebrow="proceso"
           title="simple. rápido. sin rodeos."
@@ -19,7 +19,7 @@ export function Process() {
         />
 
         <motion.div
-          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.12 }}

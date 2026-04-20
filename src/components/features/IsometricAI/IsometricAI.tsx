@@ -21,16 +21,15 @@ import { EASE_OUT_EXPO } from "../../../config/animations";
  */
 export function IsometricAI() {
   return (
-    <div className="relative z-10 pb-20">
-      <div className="mx-auto max-w-[1100px] px-6">
+    <div className="relative z-10 pb-12 md:pb-20">
+      <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
         <motion.div
-          className="relative overflow-hidden rounded-2xl"
+          className="relative overflow-hidden rounded-2xl aspect-[4/5] sm:aspect-[16/11] md:aspect-[16/10]"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.12 }}
           transition={{ duration: 0.9, ease: EASE_OUT_EXPO }}
           style={{
-            aspectRatio: "16 / 10",
             background:
               "linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #eff6ff 100%)",
             border: "1px solid rgba(37, 99, 235, 0.08)",
@@ -161,7 +160,7 @@ export function IsometricAI() {
 
           {/* Label flotante inferior */}
           <div
-            className="pointer-events-none absolute bottom-5 left-5 z-20 flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[0.65rem] uppercase tracking-[0.18em] backdrop-blur-xl"
+            className="pointer-events-none absolute bottom-3 left-3 sm:bottom-5 sm:left-5 z-20 flex items-center gap-1.5 sm:gap-2 rounded-full px-2.5 py-1 sm:px-3.5 sm:py-1.5 text-[0.5rem] sm:text-[0.58rem] md:text-[0.65rem] uppercase tracking-[0.14em] sm:tracking-[0.18em] backdrop-blur-xl"
             style={{
               background: "rgba(255, 255, 255, 0.7)",
               border: "1px solid rgba(37, 99, 235, 0.12)",
@@ -176,12 +175,15 @@ export function IsometricAI() {
                 boxShadow: "0 0 8px rgba(59, 130, 246, 0.6)",
               }}
             />
-            orquestación ia · tiempo real
+            <span className="hidden sm:inline">
+              orquestación ia · tiempo real
+            </span>
+            <span className="sm:hidden">ia · real-time</span>
           </div>
 
           {/* Label flotante superior derecho */}
           <div
-            className="pointer-events-none absolute top-5 right-5 z-20 rounded-full px-3 py-1 text-[0.6rem] font-mono tracking-wider backdrop-blur-xl"
+            className="pointer-events-none absolute top-3 right-3 sm:top-5 sm:right-5 z-20 rounded-full px-2 py-0.5 sm:px-3 sm:py-1 text-[0.48rem] sm:text-[0.54rem] md:text-[0.6rem] font-mono tracking-wider backdrop-blur-xl"
             style={{
               background: "rgba(255, 255, 255, 0.7)",
               border: "1px solid rgba(37, 99, 235, 0.12)",
