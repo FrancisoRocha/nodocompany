@@ -1,46 +1,58 @@
 import { motion } from "framer-motion";
-import { EASE_OUT_EXPO } from "../../config/animations";
 import { TECHS } from "../../data/techs";
 
+// Variantes centralizadas para orquestación eficiente
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 12, scale: 0.95 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } 
+  }
+};
+
+/**
+ * TechBar — Optimizada para rendimiento y SEO.
+ * Usa orquestación de Framer Motion para reducir el overhead de JS.
+ */
 export function TechBar() {
   return (
-    <motion.section
-      className="relative z-10 border-y border-border py-12 sm:py-14 md:py-16"
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.7, ease: EASE_OUT_EXPO }}
-    >
+    <section className="relative z-10 border-y border-neutral-200/50 py-12 bg-white/30 backdrop-blur-sm">
       <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
-        <motion.p
-          className="mb-6 sm:mb-8 text-center text-[0.65rem] sm:text-xs uppercase tracking-widest text-text-tertiary"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1, ease: EASE_OUT_EXPO }}
-        >
-          el stack con el que construimos tu área de ia
-        </motion.p>
+        <p className="mb-8 text-center text-[0.65rem] sm:text-xs uppercase tracking-[0.2em] text-neutral-400 font-semibold">
+          NUESTRO STACK TECNOLÓGICO
+        </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 md:gap-6">
-          {TECHS.map((tech, i) => (
+        <motion.div 
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          {TECHS.map((tech) => (
             <motion.span
               key={tech.name}
-              className="rounded-full border border-border bg-bg-card px-3.5 py-1.5 sm:px-5 sm:py-2 text-[0.75rem] sm:text-sm font-medium tracking-wide text-text-secondary transition-colors duration-200 hover:border-border-hover hover:text-text"
-              initial={{ opacity: 0, y: 24, scale: 0.88 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.5,
-                delay: 0.2 + i * 0.08,
-                ease: EASE_OUT_EXPO,
-              }}
+              variants={itemVariants}
+              className="rounded-full border border-neutral-200 bg-white/80 px-4 py-1.5 text-[0.75rem] sm:text-sm font-medium text-neutral-600 hover:border-blue-400 hover:text-blue-600 transition-all duration-300 cursor-default select-none shadow-sm"
             >
               {tech.name}
             </motion.span>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }

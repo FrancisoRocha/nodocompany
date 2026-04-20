@@ -1,18 +1,34 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-import { fadeUp, viewportOnce } from "../../config/animations";
 
 interface SectionHeaderProps {
   eyebrow: string;
-  title: ReactNode;
+  title: ReactNode | string;
   description?: string;
   align?: "left" | "center";
   className?: string;
 }
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+  }
+};
+
 /**
- * Encabezado reutilizable para secciones (eyebrow + título + descripción).
- * Se usa en Services, Process, About, Team, CTA, etc.
+ * SectionHeader — Optimizada para SEO y animación.
+ * Usa orquestación de hijos para una entrada fluida.
  */
 export function SectionHeader({
   eyebrow,
@@ -21,30 +37,38 @@ export function SectionHeader({
   align = "left",
   className = "",
 }: SectionHeaderProps) {
-  const alignment = align === "center" ? "text-center" : "text-left";
-  const descMax = align === "center" ? "mx-auto" : "";
+  const isCentered = align === "center";
 
   return (
-    <motion.div
-      className={`${alignment} ${className}`.trim()}
-      variants={fadeUp}
+    <motion.header
+      className={`${isCentered ? "text-center mx-auto" : "text-left"} ${className}`.trim()}
+      variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={viewportOnce}
+      viewport={{ once: true, amount: 0.4 }}
     >
-      <span className="mb-4 block text-[0.68rem] uppercase tracking-[0.15em] text-text-tertiary">
+      <motion.span 
+        variants={itemVariants}
+        className="mb-4 block font-mono text-[0.65rem] uppercase tracking-[0.2em] text-blue-600 font-semibold"
+      >
         {eyebrow}
-      </span>
-      <h2 className="mb-3 text-[clamp(1.6rem,3.2vw,2.4rem)] font-normal leading-tight tracking-tighter">
+      </motion.span>
+      
+      <motion.h2 
+        variants={itemVariants}
+        className="mb-5 text-[clamp(1.8rem,4vw,2.8rem)] font-semibold leading-[1.15] tracking-tight text-neutral-900"
+      >
         {title}
-      </h2>
+      </motion.h2>
+
       {description && (
-        <p
-          className={`max-w-[480px] text-[0.88rem] leading-relaxed text-text-secondary ${descMax}`.trim()}
+        <motion.p
+          variants={itemVariants}
+          className={`text-[1rem] leading-relaxed text-neutral-500 max-w-[600px] ${isCentered ? "mx-auto" : ""}`.trim()}
         >
           {description}
-        </p>
+        </motion.p>
       )}
-    </motion.div>
+    </motion.header>
   );
 }

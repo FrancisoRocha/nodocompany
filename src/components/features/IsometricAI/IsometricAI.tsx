@@ -12,69 +12,51 @@ import {
   AgentGlyph,
   CodeGlyph,
 } from "./glyphs";
-import { EASE_OUT_EXPO } from "../../../config/animations";
 
 /**
- * Neural Mesh — hero visual en modo claro glassmorphic.
- * Fondo blanco con tint sutil azul/violeta. Card .nodo centrada como foco.
- * Estilo Chloe Harrison / Iconly en light mode.
+ * IsometricAI — Recuperando la estética Nodo con alto rendimiento.
+ * Fondo hueso suave con gradientes de profundidad (estilo Chloe Harrison / Iconly).
  */
 export function IsometricAI() {
   return (
-    <div className="relative z-10 pb-12 md:pb-20">
+    <div className="relative z-10 pb-12 md:pb-24 overflow-hidden">
       <div className="mx-auto max-w-[1100px] px-4 sm:px-6">
         <motion.div
-          className="relative overflow-hidden rounded-2xl aspect-[4/5] sm:aspect-[16/11] md:aspect-[16/10]"
-          initial={{ opacity: 0, y: 20 }}
+          className="relative overflow-hidden rounded-[24px] aspect-[4/5] sm:aspect-[16/11] md:aspect-[16/10]"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.12 }}
-          transition={{ duration: 0.9, ease: EASE_OUT_EXPO }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            background:
-              "linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #eff6ff 100%)",
+            // Fondo hueso sutil
+            background: "linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #eff6ff 100%)",
             border: "1px solid rgba(37, 99, 235, 0.08)",
-            boxShadow:
-              "0 40px 80px -30px rgba(37, 99, 235, 0.15), 0 20px 40px -20px rgba(124, 58, 237, 0.08)",
+            boxShadow: "0 40px 100px -30px rgba(37, 99, 235, 0.12), 0 20px 40px -20px rgba(124, 58, 237, 0.05)",
           }}
         >
-          {/* Tint gradiente sutil esquina superior derecha (tipo Chloe) */}
+          {/* Tint gradiente sutil azul/violeta de profundidad */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 pointer-events-none"
             style={{
-              background:
-                "radial-gradient(ellipse 60% 50% at 85% 15%, rgba(59, 130, 246, 0.15) 0%, rgba(124, 58, 237, 0.08) 35%, transparent 70%)",
+              background: "radial-gradient(ellipse 70% 60% at 80% 20%, rgba(59, 130, 246, 0.12) 0%, rgba(124, 58, 237, 0.06) 40%, transparent 80%)",
             }}
           />
 
-          {/* Tint inferior izquierdo cyan */}
+          {/* Dot grid sutil para textura */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 opacity-[0.25] pointer-events-none"
             style={{
-              background:
-                "radial-gradient(ellipse 50% 40% at 15% 85%, rgba(6, 182, 212, 0.12) 0%, transparent 70%)",
+              backgroundImage: "radial-gradient(circle, #2563eb 0.5px, transparent 0.5px)",
+              backgroundSize: "32px 32px",
+              maskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 90%)",
+              WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 90%)",
             }}
           />
 
-          {/* Dot grid sutil */}
-          <div
-            className="absolute inset-0 opacity-40"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle, rgba(37, 99, 235, 0.18) 1px, transparent 1px)",
-              backgroundSize: "26px 26px",
-              maskImage:
-                "radial-gradient(ellipse 75% 70% at 50% 50%, black 0%, black 50%, transparent 90%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 75% 70% at 50% 50%, black 0%, black 50%, transparent 90%)",
-            }}
-          />
-
-          {/* Conexiones animadas */}
           <NeuralMesh />
 
-          {/* Cards flotantes */}
           <div className="absolute inset-0">
-            {/* Nodo central — el core, más prominente */}
+            {/* Nodo central — núcleo del sistema */}
             <FloatingCard
               label=".nodo"
               sublabel="core"
@@ -85,7 +67,7 @@ export function IsometricAI() {
               delay={0}
             />
 
-            {/* Satélites — composición centrípeta alrededor del core */}
+            {/* Satélites en orquestación */}
             <FloatingCard
               label="gpt-4o"
               icon={<GptGlyph />}
@@ -94,7 +76,6 @@ export function IsometricAI() {
               variant="accent"
               floatOffset={2}
             />
-
             <FloatingCard
               label="claude"
               icon={<ClaudeGlyph />}
@@ -103,7 +84,6 @@ export function IsometricAI() {
               variant="accent"
               floatOffset={-2}
             />
-
             <FloatingCard
               label="n8n"
               icon={<N8nGlyph />}
@@ -111,7 +91,6 @@ export function IsometricAI() {
               delay={0.4}
               floatOffset={3}
             />
-
             <FloatingCard
               label="whatsapp"
               icon={<WhatsappGlyph />}
@@ -119,7 +98,6 @@ export function IsometricAI() {
               delay={0.5}
               floatOffset={-3}
             />
-
             <FloatingCard
               label="vectors"
               sublabel="rag"
@@ -129,7 +107,6 @@ export function IsometricAI() {
               size="sm"
               floatOffset={2}
             />
-
             <FloatingCard
               label="webhook"
               icon={<WebhookGlyph />}
@@ -138,7 +115,6 @@ export function IsometricAI() {
               size="sm"
               floatOffset={-1}
             />
-
             <FloatingCard
               label="agent"
               icon={<AgentGlyph />}
@@ -147,7 +123,6 @@ export function IsometricAI() {
               size="sm"
               floatOffset={1}
             />
-
             <FloatingCard
               label="api"
               icon={<CodeGlyph />}
@@ -158,39 +133,10 @@ export function IsometricAI() {
             />
           </div>
 
-          {/* Label flotante inferior */}
-          <div
-            className="pointer-events-none absolute bottom-3 left-3 sm:bottom-5 sm:left-5 z-20 flex items-center gap-1.5 sm:gap-2 rounded-full px-2.5 py-1 sm:px-3.5 sm:py-1.5 text-[0.5rem] sm:text-[0.58rem] md:text-[0.65rem] uppercase tracking-[0.14em] sm:tracking-[0.18em] backdrop-blur-xl"
-            style={{
-              background: "rgba(255, 255, 255, 0.7)",
-              border: "1px solid rgba(37, 99, 235, 0.12)",
-              color: "#475569",
-            }}
-          >
-            <span
-              className="inline-block h-1.5 w-1.5 rounded-full"
-              style={{
-                background:
-                  "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)",
-                boxShadow: "0 0 8px rgba(59, 130, 246, 0.6)",
-              }}
-            />
-            <span className="hidden sm:inline">
-              orquestación ia · tiempo real
-            </span>
-            <span className="sm:hidden">ia · real-time</span>
-          </div>
-
-          {/* Label flotante superior derecho */}
-          <div
-            className="pointer-events-none absolute top-3 right-3 sm:top-5 sm:right-5 z-20 rounded-full px-2 py-0.5 sm:px-3 sm:py-1 text-[0.48rem] sm:text-[0.54rem] md:text-[0.6rem] font-mono tracking-wider backdrop-blur-xl"
-            style={{
-              background: "rgba(255, 255, 255, 0.7)",
-              border: "1px solid rgba(37, 99, 235, 0.12)",
-              color: "#64748b",
-            }}
-          >
-            v1.0 · mesh
+          {/* Labels dinámicos */}
+          <div className="absolute bottom-5 left-5 z-20 flex items-center gap-2 rounded-full px-4 py-1.5 backdrop-blur-xl border border-blue-500/10 bg-white/60 text-[0.6rem] sm:text-[0.65rem] uppercase tracking-widest text-slate-500 font-medium">
+            <span className="h-1.5 w-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+            Orquestación en Tiempo Real
           </div>
         </motion.div>
       </div>

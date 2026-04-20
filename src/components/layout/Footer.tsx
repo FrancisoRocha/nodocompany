@@ -1,43 +1,45 @@
 import { useScrollTo } from "../../hooks/useScrollTo";
 import { FOOTER_LINKS, SITE } from "../../config/site";
 
+/**
+ * Footer — Optimizado para accesibilidad y SEO.
+ * Mejora el contraste y la navegación semántica.
+ */
 export function Footer() {
   const scrollTo = useScrollTo();
 
   return (
-    <footer className="relative z-10 border-t border-border py-8 sm:py-10">
-      <div className="mx-auto flex max-w-[1100px] flex-col items-center gap-5 px-4 sm:px-6 sm:flex-row sm:justify-between">
-        <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-7 text-center">
-          <a
-            href="#"
-            className="flex items-center gap-1.5 text-[0.88rem] font-medium text-text no-underline"
+    <footer className="relative z-10 border-t border-slate-200/60 py-10 bg-[#f8fafc]">
+      <div className="mx-auto flex max-w-[1100px] flex-col items-center gap-6 px-6 sm:flex-row sm:justify-between">
+        <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-8">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center gap-2 text-sm font-semibold text-neutral-900 transition-opacity hover:opacity-70"
+            aria-label="Volver al inicio de la página"
           >
-            <span
-              className="inline-block h-1.5 w-1.5 rounded-full"
-              style={{
-                background:
-                  "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)",
-              }}
-            />
+            <span className="inline-block h-2 w-2 rounded-full bg-gradient-to-tr from-blue-600 to-violet-600" />
             {SITE.name}
-          </a>
-          <span className="text-[0.7rem] text-text-tertiary">
+          </button>
+          
+          <span className="text-xs text-neutral-500 font-medium">
             © {SITE.year} {SITE.name}. {SITE.locations}.
           </span>
         </div>
 
-        <ul className="flex flex-wrap justify-center gap-4 sm:gap-6" style={{ listStyle: "none" }}>
-          {FOOTER_LINKS.map((link) => (
-            <li key={link.id}>
-              <button
-                onClick={() => scrollTo(link.id)}
-                className="cursor-pointer border-none bg-transparent text-[0.72rem] text-text-secondary transition-colors hover:text-text font-mono"
-              >
-                {link.label}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <nav aria-label="Navegación secundaria del pie de página">
+          <ul className="flex flex-wrap justify-center gap-6 list-none m-0 p-0">
+            {FOOTER_LINKS.map((link) => (
+              <li key={link.id}>
+                <button
+                  onClick={() => scrollTo(link.id)}
+                  className="text-xs text-neutral-500 font-mono tracking-tight hover:text-blue-600 transition-colors duration-200 cursor-pointer"
+                >
+                  {link.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </footer>
   );

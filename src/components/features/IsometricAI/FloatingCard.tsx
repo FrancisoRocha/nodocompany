@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
+import { memo, useMemo } from "react";
 import type { ReactNode } from "react";
-import { EASE_OUT_EXPO } from "../../../config/animations";
 
 interface FloatingCardProps {
   label: string;
@@ -32,10 +32,10 @@ const ICON_SCALES: Record<NonNullable<FloatingCardProps["size"]>, string> = {
 };
 
 /**
- * Glassmorphic card en modo claro (estilo Chloe Harrison).
- * Base blanca semi-transparente con borde sutil azul y tint interior.
+ * FloatingCard — Glassmorphism Premium restaurado.
+ * Estética de alta calidad con optimización de rendimiento.
  */
-export function FloatingCard({
+export const FloatingCard = memo(function FloatingCard({
   label,
   sublabel,
   icon,
@@ -45,128 +45,97 @@ export function FloatingCard({
   variant = "default",
   floatOffset = 0,
 }: FloatingCardProps) {
-  const sizeClass = SIZES[size];
-  const labelSize = LABEL_SIZES[size];
-  const iconScale = ICON_SCALES[size];
+  
+  const config = useMemo(() => ({
+    sizeClass: SIZES[size],
+    labelSize: LABEL_SIZES[size],
+    iconScale: ICON_SCALES[size]
+  }), [size]);
 
   const isCore = variant === "core";
   const isAccent = variant === "accent";
 
   return (
     <motion.div
-      className="absolute z-10"
+      className="absolute z-10 will-change-transform"
       style={{
         top: position.top,
         left: position.left,
-        transform: "translate(-50%, -50%)",
+        x: "-50%",
+        y: "-50%",
       }}
-      initial={{ opacity: 0, scale: 0.6, filter: "blur(6px)" }}
-      whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.9, delay, ease: EASE_OUT_EXPO }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: "-20px" }}
+      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
     >
-      <motion.div
-        animate={{
-          y: [0, -8 + floatOffset, 0],
-        }}
-        transition={{
-          duration: 5 + delay * 1.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+      <div 
+        className="floating-anim"
+        style={{ 
+          animationDelay: `${delay}s`,
+          "--float-dist": `${-8 + floatOffset}px` 
+        } as any}
       >
         <div
-          className={`relative ${sizeClass} rounded-2xl flex flex-col items-center justify-center gap-1.5 backdrop-blur-xl`}
+          className={`relative ${config.sizeClass} rounded-2xl flex flex-col items-center justify-center gap-1.5 backdrop-blur-xl transition-all duration-500`}
           style={
             isCore
               ? {
-                  background:
-                    "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
-                  border: "1px solid rgba(255, 255, 255, 0.35)",
-                  boxShadow:
-                    "0 24px 56px -18px rgba(99, 102, 241, 0.4), 0 0 32px rgba(139, 92, 246, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.25)",
+                  background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.4)",
+                  boxShadow: "0 24px 56px -18px rgba(99, 102, 241, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
                 }
               : isAccent
                 ? {
-                    background:
-                      "linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(219, 234, 254, 0.7) 100%)",
-                    border: "1px solid rgba(59, 130, 246, 0.25)",
-                    boxShadow:
-                      "0 18px 40px -15px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.8)",
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(219, 234, 254, 0.8) 100%)",
+                    border: "1px solid rgba(59, 130, 246, 0.3)",
+                    boxShadow: "0 18px 40px -15px rgba(37, 99, 235, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
                   }
                 : {
-                    background:
-                      "linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 245, 249, 0.8) 100%)",
-                    border: "1px solid rgba(37, 99, 235, 0.12)",
-                    boxShadow:
-                      "0 18px 40px -15px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8)",
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.9) 100%)",
+                    border: "1px solid rgba(37, 99, 235, 0.15)",
+                    boxShadow: "0 18px 40px -15px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
                   }
           }
         >
-          <div
-            className={`flex flex-col items-center justify-center gap-1.5 ${iconScale}`}
-          >
+          <div className={`flex flex-col items-center justify-center gap-1.5 ${config.iconScale}`}>
             {icon}
             <span
-              className={`${labelSize} font-mono tracking-wider ${
-                isCore
-                  ? "text-white font-medium"
-                  : isAccent
-                    ? "text-blue-700"
-                    : "text-slate-600"
+              className={`${config.labelSize} font-mono tracking-wider font-medium ${
+                isCore ? "text-white" : isAccent ? "text-blue-700" : "text-slate-600"
               }`}
             >
               {label}
             </span>
             {sublabel && (
-              <span
-                className={`text-[0.38rem] sm:text-[0.42rem] md:text-[0.48rem] font-mono tracking-wider ${
-                  isCore ? "text-white/70" : "text-slate-400"
-                }`}
-              >
+              <span className={`text-[0.42rem] sm:text-[0.5rem] font-mono tracking-wider ${isCore ? "text-white/70" : "text-slate-400"}`}>
                 {sublabel}
               </span>
             )}
           </div>
 
-          {/* Pulse halo solo en el core */}
           {isCore && (
-            <>
-              <motion.div
-                className="absolute inset-0 rounded-2xl pointer-events-none"
-                style={{
-                  border: "1.5px solid rgba(129, 140, 248, 0.45)",
-                }}
-                animate={{
-                  scale: [1, 1.18, 1.35],
-                  opacity: [0.6, 0.15, 0],
-                }}
-                transition={{
-                  duration: 2.8,
-                  repeat: Infinity,
-                  ease: "easeOut",
-                }}
-              />
-              <motion.div
-                className="absolute inset-0 rounded-2xl pointer-events-none"
-                style={{
-                  border: "1.5px solid rgba(167, 139, 250, 0.35)",
-                }}
-                animate={{
-                  scale: [1, 1.18, 1.35],
-                  opacity: [0.5, 0.12, 0],
-                }}
-                transition={{
-                  duration: 2.8,
-                  repeat: Infinity,
-                  ease: "easeOut",
-                  delay: 1.4,
-                }}
-              />
-            </>
+            <div className="absolute inset-0 rounded-2xl animate-pulse-slow border-2 border-white/20 pointer-events-none" />
           )}
         </div>
-      </motion.div>
+      </div>
+
+      <style>{`
+        .floating-anim {
+          animation: float-card 6s infinite ease-in-out;
+          will-change: transform;
+        }
+        @keyframes float-card {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(var(--float-dist, -10px)); }
+        }
+        .animate-pulse-slow {
+          animation: core-ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        @keyframes core-ping {
+          75%, 100% { transform: scale(1.3); opacity: 0; }
+        }
+      `}</style>
     </motion.div>
   );
-}
+});
