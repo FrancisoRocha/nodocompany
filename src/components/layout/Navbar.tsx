@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useScrollTo } from "../../hooks/useScrollTo";
+import { NAV_LINKS } from "../../config/site";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const scrollTo = useScrollTo();
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+  const handleClick = (id: string) => {
+    scrollTo(id);
     setIsOpen(false);
   };
 
@@ -15,39 +17,34 @@ export function Navbar() {
         href="#"
         className="flex items-center gap-1.5 text-base font-medium tracking-tight text-text no-underline"
       >
-        <span className="inline-block h-[7px] w-[7px] rounded-full bg-green" />
+        <span
+          className="inline-block h-[7px] w-[7px] rounded-full"
+          style={{
+            background:
+              "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)",
+          }}
+        />
         nodo
       </a>
 
-      {/* Desktop links */}
-      <ul className="hidden items-center gap-9 md:flex" style={{ listStyle: "none" }}>
+      {/* Desktop */}
+      <ul
+        className="hidden items-center gap-9 md:flex"
+        style={{ listStyle: "none" }}
+      >
+        {NAV_LINKS.map((link) => (
+          <li key={link.id}>
+            <button
+              onClick={() => handleClick(link.id)}
+              className="cursor-pointer border-none bg-transparent text-[0.8rem] tracking-wide text-text-secondary transition-colors hover:text-text font-mono"
+            >
+              {link.label}
+            </button>
+          </li>
+        ))}
         <li>
           <button
-            onClick={() => scrollTo("servicios")}
-            className="cursor-pointer border-none bg-transparent text-[0.8rem] tracking-wide text-text-secondary transition-colors hover:text-text font-mono"
-          >
-            servicios
-          </button>
-        </li>
-        <li>
-          <button
-            onClick={() => scrollTo("proceso")}
-            className="cursor-pointer border-none bg-transparent text-[0.8rem] tracking-wide text-text-secondary transition-colors hover:text-text font-mono"
-          >
-            proceso
-          </button>
-        </li>
-        <li>
-          <button
-            onClick={() => scrollTo("equipo")}
-            className="cursor-pointer border-none bg-transparent text-[0.8rem] tracking-wide text-text-secondary transition-colors hover:text-text font-mono"
-          >
-            equipo
-          </button>
-        </li>
-        <li>
-          <button
-            onClick={() => scrollTo("contacto")}
+            onClick={() => handleClick("contacto")}
             className="cursor-pointer rounded-md bg-text px-4 py-1.5 text-[0.78rem] text-bg transition-all hover:-translate-y-0.5 hover:opacity-85 font-mono border-none"
           >
             cotizar proyecto
@@ -69,17 +66,17 @@ export function Navbar() {
       {/* Mobile menu */}
       {isOpen && (
         <div className="absolute top-full left-0 right-0 border-b border-border bg-bg/95 backdrop-blur-xl p-6 flex flex-col gap-4 md:hidden">
-          {["servicios", "proceso", "equipo"].map((item) => (
+          {NAV_LINKS.map((link) => (
             <button
-              key={item}
-              onClick={() => scrollTo(item)}
+              key={link.id}
+              onClick={() => handleClick(link.id)}
               className="cursor-pointer border-none bg-transparent text-left text-sm text-text-secondary hover:text-text font-mono"
             >
-              {item}
+              {link.label}
             </button>
           ))}
           <button
-            onClick={() => scrollTo("contacto")}
+            onClick={() => handleClick("contacto")}
             className="cursor-pointer rounded-md bg-text px-4 py-2 text-sm text-bg font-mono border-none"
           >
             cotizar proyecto

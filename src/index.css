@@ -1,19 +1,38 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #eeeee7;
-  --color-bg-alt: #e5e5dc;
-  --color-bg-card: #f5f5f0;
-  --color-text: #252524;
-  --color-text-secondary: #6b6b68;
-  --color-text-tertiary: #9a9a95;
-  --color-border: rgba(37, 37, 36, 0.1);
-  --color-border-hover: rgba(37, 37, 36, 0.25);
-  --color-green: #2a9d6a;
-  --color-green-soft: rgba(42, 157, 106, 0.08);
-  --color-accent-soft: rgba(37, 37, 36, 0.06);
+  /* base --------------------------------------------------- */
+  --color-bg: #fafaf9;
+  --color-bg-alt: #f4f4f2;
+  --color-bg-card: #ffffff;
+  --color-bg-dark: #050510;
+  --color-bg-dark-elevated: #0f0f18;
+
+  /* text --------------------------------------------------- */
+  --color-text: #0a0a0a;
+  --color-text-secondary: #57575a;
+  --color-text-tertiary: #8b8b93;
+  --color-text-on-dark: #f5f5f7;
+  --color-text-on-dark-muted: rgba(245, 245, 247, 0.6);
+
+  /* borders ------------------------------------------------ */
+  --color-border: rgba(10, 10, 10, 0.08);
+  --color-border-hover: rgba(10, 10, 10, 0.2);
+  --color-border-dark: rgba(255, 255, 255, 0.08);
+  --color-border-dark-hover: rgba(255, 255, 255, 0.2);
+
+  /* accent (blue + gradientes) ----------------------------- */
+  --color-accent: #2563eb;
+  --color-accent-bright: #3b82f6;
+  --color-accent-cyan: #06b6d4;
+  --color-accent-violet: #7c3aed;
+  --color-accent-soft: rgba(37, 99, 235, 0.08);
+  --color-accent-soft-strong: rgba(37, 99, 235, 0.18);
+
+  /* grid ---------------------------------------------------- */
   --color-grid-blue: #3b82f6;
 
+  /* fonts -------------------------------------------------- */
   --font-mono: "ABCDiatypeMono", "SF Mono", "Fira Code", "Cascadia Code",
     monospace;
 }
@@ -42,7 +61,30 @@
   }
 
   ::selection {
-    background: var(--color-text);
-    color: var(--color-bg);
+    background: var(--color-accent);
+    color: #ffffff;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      var(--color-accent) 0%,
+      var(--color-accent-violet) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(var(--color-bg-card), var(--color-bg-card))
+        padding-box,
+      linear-gradient(135deg, var(--color-accent), var(--color-accent-violet))
+        border-box;
+    border: 1px solid transparent;
   }
 }

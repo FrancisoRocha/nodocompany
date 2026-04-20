@@ -4,6 +4,10 @@ const GRID_SIZE = 40;
 const HOVER_RADIUS = 90;
 const BLUE_COLOR = { r: 59, g: 130, b: 246 }; // #3b82f6
 
+/**
+ * Fondo de grid animado que reacciona al mouse.
+ * Canvas full-width detrás del contenido. No interfiere con clicks (pointer-events: none).
+ */
 export function GridBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -1000, y: -1000 });
@@ -33,21 +37,19 @@ export function GridBackground() {
 
         const dist = Math.sqrt((centerX - mx) ** 2 + (centerY - my) ** 2);
 
-        // Base grid lines (very subtle)
+        // Base grid (muy sutil)
         ctx.strokeStyle = "rgba(37, 37, 36, 0.04)";
         ctx.lineWidth = 0.5;
         ctx.strokeRect(cellX, cellY, GRID_SIZE, GRID_SIZE);
 
-        // Highlight squares near cursor
+        // Highlight cerca del cursor
         if (dist < HOVER_RADIUS) {
           const intensity = 1 - dist / HOVER_RADIUS;
           const eased = intensity * intensity * intensity;
 
-          // Fill with blue
           ctx.fillStyle = `rgba(${BLUE_COLOR.r}, ${BLUE_COLOR.g}, ${BLUE_COLOR.b}, ${eased * 0.28})`;
           ctx.fillRect(cellX + 1, cellY + 1, GRID_SIZE - 2, GRID_SIZE - 2);
 
-          // Border glow
           ctx.strokeStyle = `rgba(${BLUE_COLOR.r}, ${BLUE_COLOR.g}, ${BLUE_COLOR.b}, ${eased * 0.6})`;
           ctx.lineWidth = 1;
           ctx.strokeRect(cellX + 0.5, cellY + 0.5, GRID_SIZE - 1, GRID_SIZE - 1);
@@ -80,20 +82,10 @@ export function GridBackground() {
       };
     };
 
-    const handleScroll = () => {
-      // Update mouse position relative to scroll
-      mouseRef.current = {
-        ...mouseRef.current,
-        y: mouseRef.current.y,
-      };
-    };
-
     resize();
     window.addEventListener("resize", resize);
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("scroll", handleScroll);
 
-    // Resize observer to handle dynamic content height
     const observer = new ResizeObserver(resize);
     observer.observe(document.body);
 
@@ -102,7 +94,6 @@ export function GridBackground() {
     return () => {
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", handleScroll);
       observer.disconnect();
       cancelAnimationFrame(rafRef.current);
     };

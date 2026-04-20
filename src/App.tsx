@@ -1,13 +1,14 @@
-import { Navbar } from "./components/Navbar/Navbar";
-import { Hero } from "./components/Hero/Hero";
-import { TechBar } from "./components/TechBar/TechBar";
-import { Services } from "./components/Services/Services";
-import { Process } from "./components/Process/Process";
-import { About } from "./components/About/About";
-import { Team } from "./components/Team/Team";
-import { CTA } from "./components/CTA/CTA";
-import { Footer } from "./components/Footer/Footer";
-import { GridBackground } from "./components/GridBackground/GridBackground";
+import { Navbar } from "./components/layout/Navbar";
+import { Footer } from "./components/layout/Footer";
+import { GridBackground } from "./components/layout/GridBackground";
+import { Hero } from "./components/sections/Hero";
+import { TechBar } from "./components/sections/TechBar";
+import { Services } from "./components/sections/Services";
+import { Process } from "./components/sections/Process";
+import { About } from "./components/sections/About";
+import { Team } from "./components/sections/Team";
+import { CTA } from "./components/sections/CTA";
+import { IsometricAI } from "./components/features/IsometricAI/IsometricAI";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <GridBackground />
       <Navbar />
       <Hero />
+      <IsometricAI />
       <TechBar />
       <Services />
       <Process />

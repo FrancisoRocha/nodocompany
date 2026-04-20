@@ -1,11 +1,6 @@
 import { motion } from "framer-motion";
-
-const STATS = [
-  { num: "5", label: "especialistas" },
-  { num: "3", label: "áreas de servicio" },
-  { num: "2", label: "países" },
-  { num: "∞", label: "café consumido" },
-];
+import { STATS } from "../../data/stats";
+import { EASE_OUT_EXPO } from "../../config/animations";
 
 export function About() {
   return (
@@ -16,22 +11,23 @@ export function About() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.12 }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.65, ease: EASE_OUT_EXPO }}
           >
             <span className="mb-4 block text-[0.68rem] uppercase tracking-[0.15em] text-text-tertiary">
               nosotros
             </span>
             <h2 className="mb-3 text-[clamp(1.6rem,3.2vw,2.4rem)] font-normal leading-tight tracking-tighter">
-              un equipo pequeño con hambre de grandes resultados.
+              un equipo compacto con hambre de grandes resultados.
             </h2>
             <p className="mb-6 max-w-[480px] text-[0.88rem] leading-relaxed text-text-secondary">
-              somos desarrolladores, diseñadores y especialistas en atención al
-              cliente. no somos una agencia gigante — somos un equipo compacto
-              que se mueve rápido y entrega calidad.
+              somos dos fundadores — ingeniería y operaciones — que
+              construyen, venden y dan soporte directamente. sin
+              intermediarios, hablas con quien escribe el código.
             </p>
             <p className="max-w-[480px] text-[0.88rem] leading-relaxed text-text-secondary">
-              nacimos en ciudad de méxico con presencia en argentina. trabajamos
-              remoto, pensamos global, ejecutamos local.
+              trabajamos 100% remoto desde ciudad de méxico. pensamos global,
+              entregamos rápido, y nos quedamos para mantener lo que
+              construimos.
             </p>
           </motion.div>
 
@@ -43,7 +39,7 @@ export function About() {
             transition={{
               duration: 0.65,
               delay: 0.1,
-              ease: [0.16, 1, 0.3, 1],
+              ease: EASE_OUT_EXPO,
             }}
           >
             {STATS.map((stat) => (
